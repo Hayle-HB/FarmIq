@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Farm Monitoring and Crop Recommendation</title>
+    <style>
+      body {
+        font-family: "Oswald", sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .slider-container {
+        position: relative;
+        width: 60%; /* Reduced width */
+        max-width: 800px; /* Reduced max-width */
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .slider {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+      }
+
+      .slide {
+        min-width: 100%;
+        transition: filter 0.5s;
+        position: relative;
+      }
+
+      .slide img {
+        width: 100%;
+        border-radius: 10px;
+        filter: grayscale(100%);
+      }
+
+      .slide:hover img {
+        filter: grayscale(0);
+      }
+
+      .slide:hover .overlay {
+        opacity: 1;
+        bottom: 0; /* Ensure the text appears at the bottom */
+      }
+
+      .overlay {
+        position: absolute;
+        bottom: 10px; /* Position the text at the bottom */
+        left: 0;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.5s;
+        border-radius: 10px;
+        padding: 1em; /* Added padding for better text visibility */
+      }
+
+      .overlay p {
+        margin: 0;
+        font-size: 1.5rem;
+        text-align: center;
+      }
+
+      .nav-buttons {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        transform: translateY(-50%);
+      }
+
+      .nav-buttons button {
+        background-color: rgba(0, 0, 0, 0.5);
+        border: none;
+        color: white;
+        font-size: 2rem;
+        cursor: pointer;
+        padding: 0.5em 1em;
+        transition: background-color 0.3s;
+      }
+
+      .nav-buttons button:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="slider-container">
+      <div class="slider">
+        <div class="slide">
+          <img src="../assets/gallary/desing.png" alt="Farm Monitoring" />
+          <div class="overlay">
+            <p>
+              Farm monitoring systems help in observing and managing the health
+              and productivity of crops.
+            </p>
+          </div>
+        </div>
+        <div class="slide">
+          <img src="../assets/gallary/farnuit.jpg" alt="Crop Recommendation" />
+          <div class="overlay">
+            <p>
+              Crop recommendation systems provide valuable insights on the best
+              crops to plant based on various factors.
+            </p>
+          </div>
+        </div>
+        <div class="slide">
+          <img
+            src="../assets/gallary/mobile.jpeg"
+            alt="Sustainable Agriculture"
+          />
+          <div class="overlay">
+            <p>
+              Sustainable agriculture practices ensure long-term crop
+              productivity and environmental health.
+            </p>
+          </div>
+        </div>
+
+        <div class="slide">
+          <img
+            src="../assets/gallary/sencers.jpg"
+            alt="Sustainable Agriculture"
+          />
+          <div class="overlay">
+            <p>
+              Sustainable agriculture practices ensure long-term crop
+              productivity and environmental health.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="nav-buttons">
+        <button id="prev">&#10094;</button>
+        <button id="next">&#10095;</button>
+      </div>
+    </div>
+
+    <script>
+      const slider = document.querySelector(".slider");
+      const slides = document.querySelectorAll(".slide");
+      const prevBtn = document.getElementById("prev");
+      const nextBtn = document.getElementById("next");
+      let index = 0;
+
+      function showSlide(n) {
+        index += n;
+        if (index < 0) index = slides.length - 1;
+        if (index >= slides.length) index = 0;
+        slider.style.transform = `translateX(${-index * 100}%)`;
+      }
+
+      prevBtn.addEventListener("click", () => showSlide(-1));
+      nextBtn.addEventListener("click", () => showSlide(1));
+    </script>
+  </body>
+</html>

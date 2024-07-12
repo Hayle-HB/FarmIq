@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Navigation Bar</title>
+</head>
+<style>
+  .nav-wrapper {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  backdrop-filter: blur(50px);
+}
+
+.nav-content {
+  max-width: 1300px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.logo {
+  width: 12rem;
+  height: auto;
+}
+
+.nav-content ul {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  list-style: none;
+}
+
+.nav-content li {
+  margin: 0 1.5rem;
+}
+
+.menu-item {
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: white;
+  position: relative;
+  cursor: pointer;
+}
+
+.menu-item::before {
+  content: "";
+  width: 2rem;
+  height: 0.2rem;
+  background: linear-gradient(90deg, #a993fe 0%, #7e61e7 100%);
+  border-radius: 0.5rem;
+  position: absolute;
+  bottom: -0.6rem;
+  opacity: 0;
+  transform: translateY(9.5rem);
+  transform-origin: top bottom;
+  transition: all .5s ease;
+}
+
+.menu-item:hover::before {
+  width: 100%;
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.contact-btn {
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background: linear-gradient(90deg, #a993fe 0%, #7e61e7 100%);
+  padding: 0.6rem 2rem;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: all 3s ease;
+}
+
+.contact-btn:hover {
+  color: #a993fe;
+  background: #000;
+  outline: 1.5px solid #a993fe;
+}
+
+
+.menu-btn {
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: .4rem;
+  color: white;
+  background: linear-gradient(90deg  ,#a993fe -0.13%, #7e61e7 99.87%);
+  line-height: 0;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  display: none;
+}
+
+
+.menu-btn:hover {
+  color: #a993fe;
+  background: black;
+  border: 1px, solid #a993fe;
+}
+
+@media (max-width: 425px) {
+
+ .logo {
+  width: 10rem;
+  height: auto;
+ }
+  
+}
+
+
+@media (max-width: 769px) {
+  .menu-btn {
+    display: block;
+  }
+  .nav-content ul {
+    display: none;
+  }
+}
+
+
+@media (max-width: 1325px){
+  .nav-wrapper {
+    padding: 0 2rem;
+  }
+}
+
+
+</style>
+<body>
+    <nav class="nav-wrapper">
+        <div class="nav-content">
+            <div class="logo">
+                <img src="logo.png" alt="Logo" class="logo">
+            </div>
+            <ul>
+                <li><a href="#" class="menu-item">Home</a></li>
+                <li><a href="#" class="menu-item">About</a></li>
+                <li><a href="#" class="menu-item">Services</a></li>
+                <li><a href="#" class="menu-item">Contact</a></li>
+            </ul>
+            <a href="#" class="contact-btn">Sign-Up</a>
+            <button class="menu-btn">&#9776;</button>
+        </div>
+    </nav>
+</body>
+</html>

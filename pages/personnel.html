@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile</title>
+    <link rel="stylesheet" href="assets/stylesheet/not_registered.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Oswald"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <style>
+      .data {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+      }
+      .personnel-body {
+        font-family: "Oswald", sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0 auto;
+      }
+
+      .personnel-container {
+        width: 700px;
+        text-align: center;
+        background-color: #fff;
+        padding: 3em;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      .title {
+        font-size: 2.5rem;
+        color: #333;
+      }
+
+      .message {
+        font-size: 1.5rem;
+        color: #666;
+        margin: 1em 0;
+      }
+
+      .register-invite {
+        font-size: 1.2rem;
+        color: #666;
+      }
+
+      .register-link {
+        display: inline-block;
+        margin-top: 1.5em;
+        padding: 0.5em 2em;
+        background-color: #ffb070;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+      }
+
+      .register-link:hover {
+        background-color: #e09e60;
+      }
+
+      .profile-container {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 500px;
+        text-align: center;
+      }
+
+      .profile-container h1 {
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .user-data {
+        text-align: left;
+        margin-bottom: 20px;
+      }
+
+      .user-data p {
+        margin: 10px 0;
+        color: #555;
+      }
+
+      .user-data p strong {
+        color: #333;
+      }
+
+      .actions {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      button {
+        background-color: #007bff;
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      button:focus {
+        outline: none;
+      }
+
+      button + button {
+        margin-left: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <nav class="nav-wrapper navbar">
+        <div class="nav-content">
+          <div class="logo">
+            <h1 id="logo">EcoFarmIQ</h1>
+          </div>
+          <ul>
+            <li>
+              <a href="index.html" class="menu-item">
+                <img src="../assets/home.svg" alt="" /> Home</a
+              >
+            </li>
+            <li>
+              <a href="./personnel.html" class="menu-item">
+                <img src="../assets/personnel.svg" alt="" /> Your Product</a
+              >
+            </li>
+            <li>
+              <a href="./largeFarmData.html" class="menu-item">
+                <img src="../assets/personnel.svg" alt="" /> Data</a
+              >
+            </li>
+            <li>
+              <a href="#" class="menu-item">
+                <img src="../assets/about.svg" alt="" /> About</a
+              >
+            </li>
+            <li>
+              <a href="#service-section" class="menu-item">
+                <img src="../assets/service.svg" alt="" /> Services</a
+              >
+            </li>
+            <li>
+              <a href="#contact" class="menu-item">
+                <img src="../assets/contact.svg" alt="" /> Contact</a
+              >
+            </li>
+          </ul>
+          <a href="./signUp.html" class="contact-btn">Sign-Up</a>
+          <button class="menu-btn">&#9776;</button>
+        </div>
+      </nav>
+    </header>
+
+    <div class="personnel-body">
+      <div
+        id="profileContainer"
+        class="personnel-container"
+        style="display: none"
+      >
+        <h1>User Profile</h1>
+        <div id="userData" class="user-data">
+          <!-- User data will be displayed here -->
+        </div>
+        <div class="actions">
+          <button id="editBtn">Edit Profile</button>
+          <button id="logoutBtn">Logout</button>
+        </div>
+      </div>
+
+      <div id="registerContainer" class="personnel-container">
+        <h1 class="title">Get Registered to Access This Service</h1>
+        <p class="message">You are not registered yet.</p>
+        <p class="register-invite">Please register to access this content.</p>
+        <a class="register-link" href="./signUp.html">Register Now</a>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const profileContainer = document.getElementById("profileContainer");
+        const registerContainer = document.getElementById("registerContainer");
+        const userDataElement = document.getElementById("userData");
+        const editBtn = document.getElementById("editBtn");
+        const logoutBtn = document.getElementById("logoutBtn");
+
+        // Retrieve data from local storage
+        const formDataString = localStorage.getItem("formData");
+        if (formDataString) {
+          const formData = JSON.parse(formDataString);
+          console.log("Form Data:", formData);
+
+          // Display user data
+          userDataElement.innerHTML = `
+           <div class = "data"> 
+             <p><strong>Name:</strong> ${formData.fname} ${formData.lname}</p>
+            <p><strong>Email:</strong> ${formData.email}</p>
+            <p><strong>Phone Number:</strong> ${formData.pnumber}</p>
+            <p><strong>Address:</strong> ${formData.address}</p>
+            <p><strong>Country:</strong> ${formData.country}</p>
+            <p><strong>Organization:</strong> ${formData.organization}</p>
+            <p><strong>Why Us:</strong> ${formData["why-us"]}</p>
+            <p><strong>Terms Accepted:</strong> ${
+              formData.terms ? "Yes" : "No"
+            }</p>
+           </div>
+          `;
+
+          // Show profile container and hide registration container
+          profileContainer.style.display = "block";
+          registerContainer.style.display = "none";
+
+          // Edit profile button click handler
+          editBtn.addEventListener("click", function () {
+            // Redirect to edit profile page (assuming edit-profile.html exists)
+            window.location.href = "edit-profile.html";
+          });
+
+          // Logout button click handler (clear local storage, redirect to login page)
+          logoutBtn.addEventListener("click", function () {
+            // Clear user data from storage
+            localStorage.clear();
+            // Redirect to login page (assuming login.html exists)
+            window.location.href = "login.html";
+          });
+        } else {
+          // Show registration container and hide profile container
+          profileContainer.style.display = "none";
+          registerContainer.style.display = "block";
+        }
+      });
+    </script>
+  </body>
+</html>

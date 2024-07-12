@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Farm Data</title>
+        <link rel="stylesheet" href="./style.css" />
+
+    <style>
+      .table-container {
+        margin: 20px auto;
+        text-align: center;
+      }
+      table {
+        width: 50%;
+        margin: 0 auto;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+      }
+      th,
+      td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      .search-container {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .search-container input {
+        padding: 8px;
+        margin-right: 10px;
+      }
+      .form-container {
+        width: 50%;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+      }
+      .form-container label,
+      .form-container input {
+        display: block;
+        margin-bottom: 10px;
+      }
+      .form-container button {
+        padding: 10px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+
+        <header>
+      <nav class="nav-wrapper navbar">
+        <div class="nav-content">
+          <div class="logo">
+            <h1 id="logo">EcoFarmIQ</h1>
+          </div>
+          <ul>
+            <li>
+              <a href="index.html" class="menu-item">
+                <img src="../assets/home.svg" alt="" /> Home</a
+              >
+            </li>
+
+            <li>
+              <a href="./personnel.html" class="menu-item">
+                <img src="../assets/personnel.svg" alt="" /> Your Product</a
+              >
+            </li>
+            <li>
+              <a href="./largeFarmData.html" class="menu-item">
+                <img src="../assets/personnel.svg" alt="" /> Data</a
+              >
+            </li>
+            <li>
+              <a href="#" class="menu-item">
+                <img src="../assets/about.svg" alt="" /> About</a
+              >
+            </li>
+            <li>
+              <a href="#service-section" class="menu-item">
+                <img src="../assets/service.svg" alt="" /> Services</a
+              >
+            </li>
+            <li>
+              <a href="#contact" class="menu-item">
+                <img src="../assets/contact.svg" alt="" /> Contact</a
+              >
+            </li>
+          </ul>
+          <a href="./signUp.html" class="contact-btn">Sign-Up</a>
+          <button class="menu-btn">&#9776;</button>
+        </div>
+      </nav>
+    </header>
+
+
+    <h1 style="text-align: center">Farm Data</h1>
+
+    <div class="form-container">
+      <h2>Enter Data for Recommendation</h2>
+      <form onsubmit="return findRecommendation()">
+        <label for="N">N:</label>
+        <input type="number" id="N" name="N" required />
+        <label for="P">P:</label>
+        <input type="number" id="P" name="P" required />
+        <label for="K">K:</label>
+        <input type="number" id="K" name="K" required />
+        <label for="temperature">Temperature:</label>
+        <input type="number" id="temperature" name="temperature" required />
+        <label for="humidity">Humidity:</label>
+        <input type="number" id="humidity" name="humidity" required />
+        <label for="pH">pH:</label>
+        <input type="number" id="pH" name="pH" step="0.1" required />
+        <label for="rainfall">Rainfall:</label>
+        <input type="number" id="rainfall" name="rainfall" required />
+        <button type="submit">Find Recommendation</button>
+      </form>
+    </div>
+
+    <div class="table-container">
+      <h2>Recommendation Result</h2>
+      <table id="recommendationTable"></table>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        fetchAndDisplayCSV(
+          "../assets/large/Crop_recommendation.csv",
+          "recommendationTable"
+        );
+      });
+
+      function fetchAndDisplayCSV(filePath, tableId) {
+        fetch(filePath)
+          .then((response) => response.text())
+          .then((data) => displayCSV(data, tableId));
+      }
+
+      function displayCSV(csv, tableId) {
+        const lines = csv.split("\n");
+        let html = "<thead><tr>";
+        const headers = lines[0].split(",");
+
+        headers.forEach((header) => {
+          html += `<th>${header}</th>`;
+        });
+
+        html += "</tr></thead><tbody>";
+        for (let i = 1; i < lines.length; i++) {
+          const cells = lines[i].split(",");
+          if (cells.length > 1) {
+            html += "<tr>";
+            cells.forEach((cell) => {
+              html += `<td>${cell}</td>`;
+            });
+            html += "</tr>";
+          }
+        }
+        html += "</tbody>";
+        document.getElementById(tableId).innerHTML = html;
+      }
+
+      function findRecommendation() {
+        const N = document.getElementById("N").value;
+        const P = document.getElementById("P").value;
+        const K = document.getElementById("K").value;
+        const temperature = document.getElementById("temperature").value;
+        const humidity = document.getElementById("humidity").value;
+        const pH = document.getElementById("pH").value;
+        const rainfall = document.getElementById("rainfall").value;
+
+        // Example: Perform recommendation logic based on input data
+        const recommendation = recommendCrop(
+          N,
+          P,
+          K,
+          temperature,
+          humidity,
+          pH,
+          rainfall
+        );
+
+        // Display recommendation in HTML table
+        displayRecommendation(recommendation);
+
+        // Prevent form submission
+        return false;
+      }
+
+      function recommendCrop(N, P, K, temperature, humidity, pH, rainfall) {
+        // Example dataset of crop recommendations (replace with actual data)
+        const cropRecommendations = [
+          {
+            crop: "Rice",
+            N: 100,
+            P: 50,
+            K: 70,
+            temperature: 30,
+            humidity: 60,
+            pH: 6.5,
+            rainfall: 600,
+          },
+          {
+            crop: "Wheat",
+            N: 80,
+            P: 40,
+            K: 60,
+            temperature: 25,
+            humidity: 70,
+            pH: 6.0,
+            rainfall: 500,
+          },
+          // Add more crop data as needed
+        ];
+
+        // Initialize variables to track the best crop and minimum distance
+        let bestCrop = "";
+        let minDistance = Infinity;
+
+        // Function to calculate distance or similarity
+        function calculateDistance(cropData) {
+          const distance = Math.sqrt(
+            Math.pow(N - cropData.N, 2) +
+              Math.pow(P - cropData.P, 2) +
+              Math.pow(K - cropData.K, 2) +
+              Math.pow(temperature - cropData.temperature, 2) +
+              Math.pow(humidity - cropData.humidity, 2) +
+              Math.pow(pH - cropData.pH, 2) +
+              Math.pow(rainfall - cropData.rainfall, 2)
+          );
+          return distance;
+        }
+
+        // Iterate through each crop recommendation and calculate distance
+        cropRecommendations.forEach((cropData) => {
+          const distance = calculateDistance(cropData);
+          // Update best crop if current crop has a smaller distance
+          if (distance < minDistance) {
+            minDistance = distance;
+            bestCrop = cropData.crop;
+          }
+        });
+
+        return bestCrop;
+      }
+
+      function displayRecommendation(recommendation) {
+        const table = document.getElementById("recommendationTable");
+        const html = `<thead><tr><th>Recommended Crop</th></tr></thead><tbody><tr><td>${recommendation}</td></tr></tbody>`;
+        table.innerHTML = html;
+      }
+    </script>
+  </body>
+</html>
