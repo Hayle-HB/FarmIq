@@ -46,9 +46,9 @@
   margin: 0 1.5rem;
 }
 .navbar .nav-content ul li a {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   img {
-    width: 20px;
+    width: 15px;
   }
 }
 .navbar .nav-content ul li a:hover {
