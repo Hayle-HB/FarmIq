@@ -542,3 +542,37 @@
     transform: rotate(5deg) scale(1.2);
   }
 }
+
+
+
+/* Hide the menu by default for small screens */
+.nav-content ul {
+  display: none;
+}
+
+/* Show the menu when the open class is added */
+.nav-content ul.open {
+  display: block;
+}
+
+/* Add some styling for the button on small screens */
+.menu-btn {
+  display: block;
+  font-size: 24px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #333;
+}
+
+/* Hide the menu button on larger screens */
+@media (min-width: 768px) {
+  .menu-btn {
+    display: none;
+  }
+
+  .nav-content ul {
+    display: flex; /* Show menu items in a row */
+  }
+}
+
