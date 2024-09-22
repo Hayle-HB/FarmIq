@@ -6,142 +6,7 @@
     <link rel="stylesheet" href="styles.css">
     <title>Navigation Bar</title>
 </head>
-<style>
-  .nav-wrapper {
-  background: rgba(0, 0, 0, 0.1);
-  padding: 0.5rem 0;
-  position: sticky;
-  top: 0;
-  z-index: 30;
-  backdrop-filter: blur(50px);
-}
 
-.nav-content {
-  max-width: 1300px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 0 auto;
-}
-
-.logo {
-  width: 12rem;
-  height: auto;
-}
-
-.nav-content ul {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  list-style: none;
-}
-
-.nav-content li {
-  margin: 0 1.5rem;
-}
-
-.menu-item {
-  text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: white;
-  position: relative;
-  cursor: pointer;
-}
-
-.menu-item::before {
-  content: "";
-  width: 2rem;
-  height: 0.2rem;
-  background: linear-gradient(90deg, #a993fe 0%, #7e61e7 100%);
-  border-radius: 0.5rem;
-  position: absolute;
-  bottom: -0.6rem;
-  opacity: 0;
-  transform: translateY(9.5rem);
-  transform-origin: top bottom;
-  transition: all .5s ease;
-}
-
-.menu-item:hover::before {
-  width: 100%;
-  transform: translateY(0);
-  opacity: 1;
-}
-
-.contact-btn {
-  font-size: 0.9rem;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  background: linear-gradient(90deg, #a993fe 0%, #7e61e7 100%);
-  padding: 0.6rem 2rem;
-  margin-right: 10px;
-  cursor: pointer;
-  transition: all 3s ease;
-}
-
-.contact-btn:hover {
-  color: #a993fe;
-  background: #000;
-  outline: 1.5px solid #a993fe;
-}
-
-
-.menu-btn {
-  width: 2.5rem;
-  height: 2.5rem;
-  font-size: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  border-radius: .4rem;
-  color: white;
-  background: linear-gradient(90deg  ,#a993fe -0.13%, #7e61e7 99.87%);
-  line-height: 0;
-  cursor: pointer;
-  transition: all 0.4s ease;
-  display: none;
-}
-
-
-.menu-btn:hover {
-  color: #a993fe;
-  background: black;
-  border: 1px, solid #a993fe;
-}
-
-@media (max-width: 425px) {
-
- .logo {
-  width: 10rem;
-  height: auto;
- }
-  
-}
-
-
-@media (max-width: 769px) {
-  .menu-btn {
-    display: block;
-  }
-  .nav-content ul {
-    display: none;
-  }
-}
-
-
-@media (max-width: 1325px){
-  .nav-wrapper {
-    padding: 0 2rem;
-  }
-}
-
-
-</style>
 <body>
     <nav class="nav-wrapper">
         <div class="nav-content">
@@ -165,40 +30,16 @@
 
 
 
+document.addEventListener('DOMContentLoaded', function() {
+  const menuButton = document.querySelector('.menu-btn');
+  const navMenu = document.querySelector('.nav-content ul');
 
-// JavaScript for Navbar Toggle on Small Screens
-document.addEventListener('DOMContentLoaded', function () {
-  const toggleButton = document.querySelector('.toggle-button');
-  const navbarMenu = document.querySelector('.navbar .menu');
-
-  if (toggleButton) {
-    toggleButton.addEventListener('click', function () {
-      navbarMenu.classList.toggle('open');
-      toggleButton.classList.toggle('active');
-    });
-  }
+  // Toggle menu visibility on button click
+  menuButton.addEventListener('click', function() {
+    navMenu.classList.toggle('open');
+  });
 });
 
-// JavaScript for Footer Subscription Form
-document.querySelector('.footer .subscribe button').addEventListener('click', function (e) {
-  e.preventDefault();
-
-  const emailInput = document.querySelector('.footer .subscribe input');
-  const email = emailInput.value;
-
-  if (validateEmail(email)) {
-    alert('Thank you for subscribing with: ' + email);
-    emailInput.value = '';  // Reset the input field
-  } else {
-    alert('Please enter a valid email address');
-  }
-});
-
-// Simple email validation function
-function validateEmail(email) {
-  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return re.test(String(email).toLowerCase());
-}        
     </scrip>
 </body>
 </html>
